@@ -1,2 +1,8 @@
-[lib]
-proc-macro = true
+[workspace]
+members = [
+    "crustos",
+    "crustos-macros",
+    "crustos-extract",
+    "examples/stm32f103-blinky",
+]
+resolver = "2"

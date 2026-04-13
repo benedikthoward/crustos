@@ -1,0 +1,81 @@
+   0.033132875s  INFO prepare_target{force=false package_id=crustos v0.1.0 (/Users/benedikthoward/Projects/crustos/crustos) target="crustos"}: cargo::core::compiler::fingerprint: fingerprint error for crustos v0.1.0 (/Users/benedikthoward/Projects/crustos/crustos)/Check { test: false }/TargetInner { name_inferred: true, ..: lib_target("crustos", ["lib"], "/Users/benedikthoward/Projects/crustos/crustos/src/lib.rs", Edition2024) }
+   0.033268583s  INFO prepare_target{force=false package_id=crustos v0.1.0 (/Users/benedikthoward/Projects/crustos/crustos) target="crustos"}: cargo::core::compiler::fingerprint:     err: failed to read `/Users/benedikthoward/Projects/crustos/target/debug/.fingerprint/crustos-33206e1875b1dac9/lib-crustos`
+
+Caused by:
+    No such file or directory (os error 2)
+
+Stack backtrace:
+   0: std::backtrace::Backtrace::create
+   1: std::backtrace::Backtrace::capture
+   2: cargo_util::paths::read_bytes
+   3: cargo_util::paths::read
+   4: cargo::core::compiler::fingerprint::_compare_old_fingerprint
+   5: cargo::core::compiler::fingerprint::prepare_target
+   6: cargo::core::compiler::compile
+   7: <cargo::core::compiler::build_runner::BuildRunner>::compile
+   8: cargo::ops::cargo_compile::compile_ws
+   9: cargo::ops::cargo_compile::compile_with_exec
+  10: cargo::ops::cargo_compile::compile
+  11: cargo::commands::check::exec
+  12: <cargo::cli::Exec>::exec
+  13: cargo::main
+  14: std::sys::backtrace::__rust_begin_short_backtrace::<fn(), ()>
+  15: std::rt::lang_start::<()>::{closure#0}
+  16: std::rt::lang_start_internal
+  17: _main
+   0.047923042s  INFO prepare_target{force=false package_id=crustos v0.1.0 (/Users/benedikthoward/Projects/crustos/crustos) target="crustos"}: cargo::core::compiler::fingerprint: fingerprint error for crustos v0.1.0 (/Users/benedikthoward/Projects/crustos/crustos)/Check { test: true }/TargetInner { name_inferred: true, ..: lib_target("crustos", ["lib"], "/Users/benedikthoward/Projects/crustos/crustos/src/lib.rs", Edition2024) }
+   0.047929042s  INFO prepare_target{force=false package_id=crustos v0.1.0 (/Users/benedikthoward/Projects/crustos/crustos) target="crustos"}: cargo::core::compiler::fingerprint:     err: failed to read `/Users/benedikthoward/Projects/crustos/target/debug/.fingerprint/crustos-7782431f55a60a25/test-lib-crustos`
+
+Caused by:
+    No such file or directory (os error 2)
+
+Stack backtrace:
+   0: std::backtrace::Backtrace::create
+   1: std::backtrace::Backtrace::capture
+   2: cargo_util::paths::read_bytes
+   3: cargo_util::paths::read
+   4: cargo::core::compiler::fingerprint::_compare_old_fingerprint
+   5: cargo::core::compiler::fingerprint::prepare_target
+   6: cargo::core::compiler::compile
+   7: <cargo::core::compiler::build_runner::BuildRunner>::compile
+   8: cargo::ops::cargo_compile::compile_ws
+   9: cargo::ops::cargo_compile::compile_with_exec
+  10: cargo::ops::cargo_compile::compile
+  11: cargo::commands::check::exec
+  12: <cargo::cli::Exec>::exec
+  13: cargo::main
+  14: std::sys::backtrace::__rust_begin_short_backtrace::<fn(), ()>
+  15: std::rt::lang_start::<()>::{closure#0}
+  16: std::rt::lang_start_internal
+  17: _main
+   0.048746417s  INFO prepare_target{force=false package_id=crustos-macros v0.1.0 (/Users/benedikthoward/Projects/crustos/crustos-macros) target="crustos_macros"}: cargo::core::compiler::fingerprint: fingerprint error for crustos-macros v0.1.0 (/Users/benedikthoward/Projects/crustos/crustos-macros)/Check { test: false }/TargetInner { name_inferred: true, for_host: true, proc_macro: true, ..: lib_target("crustos_macros", ["proc-macro"], "/Users/benedikthoward/Projects/crustos/crustos-macros/src/lib.rs", Edition2024) }
+   0.048750333s  INFO prepare_target{force=false package_id=crustos-macros v0.1.0 (/Users/benedikthoward/Projects/crustos/crustos-macros) target="crustos_macros"}: cargo::core::compiler::fingerprint:     err: failed to read `/Users/benedikthoward/Projects/crustos/target/debug/.fingerprint/crustos-macros-92dc25c20a5625ee/lib-crustos_macros`
+
+Caused by:
+    No such file or directory (os error 2)
+
+Stack backtrace:
+   0: std::backtrace::Backtrace::create
+   1: std::backtrace::Backtrace::capture
+   2: cargo_util::paths::read_bytes
+   3: cargo_util::paths::read
+   4: cargo::core::compiler::fingerprint::_compare_old_fingerprint
+   5: cargo::core::compiler::fingerprint::prepare_target
+   6: cargo::core::compiler::compile
+   7: <cargo::core::compiler::build_runner::BuildRunner>::compile
+   8: cargo::ops::cargo_compile::compile_ws
+   9: cargo::ops::cargo_compile::compile_with_exec
+  10: cargo::ops::cargo_compile::compile
+  11: cargo::commands::check::exec
+  12: <cargo::cli::Exec>::exec
+  13: cargo::main
+  14: std::sys::backtrace::__rust_begin_short_backtrace::<fn(), ()>
+  15: std::rt::lang_start::<()>::{closure#0}
+  16: std::rt::lang_start_internal
+  17: _main
+    Checking crustos-macros v0.1.0 (/Users/benedikthoward/Projects/crustos/crustos-macros)
+    Checking crustos v0.1.0 (/Users/benedikthoward/Projects/crustos/crustos)
+error: could not compile `crustos-macros` (lib) due to 1 previous error
+warning: build failed, waiting for other jobs to finish...
+error: could not compile `crustos` (lib test) due to 48 previous errors
+error: could not compile `crustos` (lib) due to 48 previous errors

@@ -1,6 +1,7 @@
+mod fixed_priority;
+use crate::task::TaskControlBlock;
 
 pub trait SchedContext {
-    fn new() -> Self;
     fn compare(&self, other: &Self) -> core::cmp::Ordering;
 }
 pub trait Scheduler {
