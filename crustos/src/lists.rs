@@ -28,7 +28,9 @@ impl List {
         }
     }
     pub fn insert_sorted(&mut self, node: &mut ListNode);
+    pub fn insert_sorted_sched_ctx(&mut self, node: &mut ListNode);
     pub fn insert_end(&mut self, node: &mut ListNode);
+    pub fn insert_front(&mut self, node: &mut ListNode);
     pub fn remove(node: &mut ListNode);
     pub fn is_empty(&self) -> bool;
     pub fn head(&self) -> Option<*const ListNode>;
@@ -102,6 +104,62 @@ fn insert_sorted(&mut self, node: &mut ListNode) {
     }
 }
 
+fn insert_sorted_sched_ctx(&mut self, node: &mut ListNode) {
+    debug_assert!(node.container.is_none(), "Already in a list");
+
+    self.length += 1;
+    node.container = Some(self);
+
+    match self.list_ends.next {
+        None => {
+
+            self.list_ends.next = Some(node);
+            self.list_ends.prev = Some(node);
+
+            node.prev = None;
+            node.next = None;
+
+        },
+
+        Some(mut current_node) => unsafe {
+
+            if (*(node.owner)).sched_context > (*((*current_node).owner)).sched_context {
+                self.list_ends.next = Some(node);
+                
+                node.prev = None;
+                node.next = Some(current_node);
+
+                (*current_node).prev = Some(node);
+                
+                return;
+            }
+
+
+            while (*(node.owner)).sched_context <= (*((*current_node).owner)).sched_context{
+                match (*current_node).next {
+                    Some(val) => {current_node = val},
+                    None => {
+                        (*current_node).next = Some(node);
+                        self.list_ends.prev = Some(node);
+
+                        node.prev = Some(current_node);
+                        return;
+                    }
+                }
+            }
+
+            let predecessor = current_node.prev.unwrap();
+            (*predecessor.next) = Some(node);
+            current_node.prev = Some(node);
+
+            node.prev = Some(predecessor);
+            node.next = Some(current_node);
+
+        }
+    }
+}
+
+
 
 fn insert_end(&mut self, node: &mut ListNode) {
 
@@ -132,9 +190,30 @@ fn insert_end(&mut self, node: &mut ListNode) {
     }
 }
 
+fn insert_front(&mut self, node: &mut ListNode) {
+
+    debug_assert!(node.container.is_none(), "Already in a list!");
+
+    node.container = Some(self);
+    node.prev = None;
+    node.next = self.list_ends.next;
+    self.length += 1;
+    self.list_ends.next = Some(node);
+
+    match self.list_ends.next {
+        None => {
+            self.list_ends.prev = Some(node);
+        },
+
+        Some(mut current_node) => {
+            (*current_node).prev = node;
+        }
+    }
+}
+
 fn remove(node: &mut ListNode) {
 
-    debug_assert!(node.container.is_none(), "not in a list");
+    debug_assert!(node.container.is_some(), "not in a list");
 
     unsafe {
         let list = &mut *node.container.unwrap();

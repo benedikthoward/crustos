@@ -6,12 +6,14 @@ pub struct PerCoreState {
     yield_pending: bool,
 
 }
+
 pub struct Kernel {
     // Per Core
     cores: [PerCoreState, MAX_CORES],
 
+    scheduler: ActiveScheduler,
+
     //shared
-    ready_list: [List, MAX_PRIORITIES],
     delayed_list: List,
     suspended_list: List,
     terminated_list: List, 
@@ -19,7 +21,6 @@ pub struct Kernel {
 
     tick_count: u64,
 
-    scheduler: ActiveScheduler
 
     scheduler_running: bool, 
     scheduler_suspended: bool,
